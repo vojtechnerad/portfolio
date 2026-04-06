@@ -8,7 +8,7 @@ import ProjectDetailPage from "./pages/ProjectDetailPage";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/portfolio">
       <div className="flex min-h-screen flex-col bg-white font-sans text-primary antialiased">
         <Navbar />
         <main className="flex-1">

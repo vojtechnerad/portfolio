@@ -131,6 +131,12 @@ export default function ProjectDetailPage() {
           <p className="text-lg leading-relaxed text-secondary">
             {project.overview}
           </p>
+          {project.subject && (
+            <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-sm">
+              <span className="font-semibold text-primary">Předmět:</span>
+              <span className="text-secondary">{project.subject}</span>
+            </div>
+          )}
         </section>
       )}
 

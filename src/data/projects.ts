@@ -11,6 +11,7 @@ export interface Project {
   github?: string;
   year?: string;
   role?: string;
+  subject?: string;
   overview?: string;
   process?: string[];
   result?: string;
@@ -46,7 +47,8 @@ export const projects: Project[] = [
       "Tvorba loga s důrazem na jednoduchost a zapamatovatelnost",
       "Definice barevné palety a typografie pro konzistentní vizuální komunikaci",
       "Aplikace vizuální identity na různé materiály — plakáty, menu, vizitky, obaly",
-    ]
+    ],
+    subject: "4ME411 Počítačová grafika a sazba"
   },
   {
     id: "design-cofee-product-page",
@@ -69,7 +71,8 @@ export const projects: Project[] = [
         "High-fidelity prototyp s interakcemi pro realistickou prezentaci",
         "Úspěšné obhájení designu před lektory kurzu s pozitivní zpětnou vazbou a menší doporučení pro zlepšení",
         "Retrospektiva a lessons learned z procesu návrhu"
-      ]
+      ],
+      subject: "4ME485 Design uživatelských rozhraní"
   },  
   {
     id: "photography-portfolio-website",
@@ -83,7 +86,8 @@ export const projects: Project[] = [
     role: "Frontend Developer",
     overview:
       "Jednoduché a elegantní portfolio pro prezentaci fotografií. Projekt zahrnoval návrh a implementaci responzivního designu s důrazem na vizuální dojem.",
-      link: "https://vojtechnerad.github.io/photography-portfolio"
+      link: "https://vojtechnerad.github.io/photography-portfolio",
+    subject: "4ME421 Digitálni fotografie"
   },
   {
     id: "eshop-obuv",
@@ -95,7 +99,8 @@ export const projects: Project[] = [
     year: "2023",
     role: "Fullstack Developer & Designer",
     overview:
-      "E-commerce platforma s administračním rozhraním, správou produktů a košíkem. Projekt vznikl jako semestrální práce z předmětu 4IZ571 Vývoj pokročilých webových aplikací v PHP."
+      "E-commerce platforma s administračním rozhraním, správou produktů a košíkem. Projekt vznikl jako semestrální práce z předmětu 4IZ571 Vývoj pokročilých webových aplikací v PHP.",
+      subject: "4IZ571 Vývoj pokročilých webových aplikací v PHP"
   },
   {
     id: "architecture-of-service-for-missing-pets",
@@ -117,7 +122,8 @@ export const projects: Project[] = [
       "Vytvoření diagramů komponent a use case diagramů pro obě architektury",
       "Porovnání obou řešení a zhodnocení jejich výhod a nevýhod pro daný případ použití",
       "Dokumentace návrhu a příprava prezentace pro obhajobu projektu"
-    ]
+    ],
+    subject: "4IT575 Softwarové architektury"
   },
   {
     id: "password-manager-prototype",
@@ -130,7 +136,7 @@ export const projects: Project[] = [
     overview:
       "Týmový projekt byl zaměřený na navrhnutí a implementaci aplikace s využitím praktik User-centered designu. Cílem bylo vytvořit prototyp správce hesel, který by byl intuitivní a snadno použitelný pro širokou škálu uživatelů. Já jsem v tomto projektu zastával pozici frontend developera, kde jsem implementoval aplikaci podle rešerše a návrhů vytvořených kolegy z týmu.",
     github: "https://github.com/vojtechnerad/password-manager-prototype",
-    link: "https://vojtechnerad.github.io/password-manager-prototype/"
-
+    link: "https://vojtechnerad.github.io/password-manager-prototype/",
+    subject: "4ME483 Design zaměřený na člověka"
   }
 ];

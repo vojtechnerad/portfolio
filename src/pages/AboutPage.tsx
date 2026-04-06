@@ -8,8 +8,8 @@ export default function AboutPage() {
       <div className="mt-10 grid gap-12 md:grid-cols-3">
         {/* Photo placeholder */}
         <div className="flex items-start justify-center">
-          <div className="flex h-56 w-56 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-dev/20 to-accent-design/20">
-            <span className="text-5xl font-bold text-primary/20">VN</span>
+          <div className="flex h-56 w-56 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-dev/20 to-accent-design/20 overflow-hidden">
+            <img src="vojtech-nerad.png" alt="Vojtěch Nerad" width="100%" className="opacity-[.85]" />
           </div>
         </div>
 

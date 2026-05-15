@@ -12,6 +12,7 @@ export interface Project {
   category: ProjectCategory;
   tags: string[];
   heroImage: string | null;
+  screenshots: string[] | null;
   link?: string;
   github?: string;
   year?: string;
@@ -38,12 +39,12 @@ export function hasCategory(
   return project.category === filter || project.category === "both";
 }
 
-export function getProjectImageSrc(heroImage: string | null): string | null {
-  if (!heroImage) {
+export function getProjectImageSrc(imagePath: string | null): string | null {
+  if (!imagePath) {
     return null;
   }
 
-  return heroImage.startsWith("/") ? heroImage : `/${heroImage}`;
+  return imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
 }
 
 export const projects: Project[] = [
@@ -54,6 +55,12 @@ export const projects: Project[] = [
     category: "design",
     tags: ["InkScape", "Affinity", "Branding", "Logo Design", "Visual Identity"],
     heroImage: 'portfolio/projects/restaurant-visual-identity/hero.png',
+    screenshots: [
+      'portfolio/projects/restaurant-visual-identity/screenshot-1.jpg',
+      'portfolio/projects/restaurant-visual-identity/screenshot-2.jpg',
+      'portfolio/projects/restaurant-visual-identity/screenshot-3.jpg',
+      'portfolio/projects/restaurant-visual-identity/screenshot-4.jpg',
+    ],
     year: "2024",
     role: "Graphic Designer",
     overview:
@@ -91,6 +98,7 @@ export const projects: Project[] = [
     category: "design",
     tags: ["Figma", "UX Research", "Prototyping"],
     heroImage: 'portfolio/projects/design-cofee-product-page/hero.png',
+    screenshots: ['portfolio/projects/design-cofee-product-page/screenshot-1.png'],
     year: "2024",
     role: "UX/UI Designer",
     overview: 
@@ -137,6 +145,7 @@ export const projects: Project[] = [
     category: "both",
     tags: ["React", "Tailwind CSS"],
     heroImage: 'portfolio/projects/photography-portfolio-website/hero.png',
+    screenshots: null,
     github: "https://github.com/vojtechnerad/photography-portfolio",
     year: "2024",
     role: "Frontend Developer",
@@ -169,6 +178,7 @@ export const projects: Project[] = [
     category: "both",
     tags: ["PHP", "NETTE", "MySQL", "Bootstrap"],
     heroImage: null,
+    screenshots: null,
     year: "2023",
     role: "Fullstack Developer & Designer",
     overview:
@@ -203,6 +213,7 @@ export const projects: Project[] = [
     "category": "dev",
     tags: ["Microservices", "SOA", "Draw.io", "Usecase Diagram", "Component Diagram"],
     heroImage: null,
+    screenshots: null,
     year: "2025",
     role: "System Architect",
     overview:
@@ -248,6 +259,7 @@ export const projects: Project[] = [
     category: "dev",
     tags: ["React", "TypeScript", "Tailwind CSS"],
     heroImage: null,
+    screenshots: null,
     year: "2024",
     role: "Frontend Developer",
     overview:

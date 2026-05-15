@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { projects, categoryLabels, getProjectImageSrc } from "../data/projects";
 
 export default function ProjectDetailPage() {
   const { id } = useParams<{ id: string }>();
   const project = projects.find((p) => p.id === id);
+  const [selectedScreenshot, setSelectedScreenshot] = useState<string | null>(null);
 
   if (!project) {
     return (
@@ -53,217 +55,274 @@ export default function ProjectDetailPage() {
         : "bg-gradient-to-r from-blue-50 to-purple-50 text-purple-700";
 
   const heroImageSrc = getProjectImageSrc(project.heroImage);
+  const screenshotSrcs = project.screenshots?.map((screenshot) => getProjectImageSrc(screenshot)) ?? null;
+  const hasScreenshots = Boolean(screenshotSrcs?.length);
 
   return (
-    <article className="mx-auto max-w-4xl px-6 py-16">
-      {/* Breadcrumb */}
-      <nav className="mb-8 flex items-center gap-2 text-sm text-secondary">
-        <Link to="/" className="hover:text-primary transition-colors">
-          Domů
-        </Link>
-        <span>/</span>
-        <Link
-          to={`/projekty${project.category !== "both" ? `?filter=${project.category}` : ""}`}
-          className="hover:text-primary transition-colors"
-        >
-          Projekty
-        </Link>
-        <span>/</span>
-        <span className="text-primary">{project.title}</span>
-      </nav>
+    <>
+      <article className="mx-auto max-w-4xl px-6 py-16">
+        {/* Breadcrumb */}
+        <nav className="mb-8 flex items-center gap-2 text-sm text-secondary">
+          <Link to="/" className="hover:text-primary transition-colors">
+            Domů
+          </Link>
+          <span>/</span>
+          <Link
+            to={`/projekty${project.category !== "both" ? `?filter=${project.category}` : ""}`}
+            className="hover:text-primary transition-colors"
+          >
+            Projekty
+          </Link>
+          <span>/</span>
+          <span className="text-primary">{project.title}</span>
+        </nav>
 
-      {/* Header */}
-      <header className="mb-12">
-        <div className="mb-4 flex items-center gap-3">
-          <span className={`inline-block h-2.5 w-2.5 rounded-full ${dotStyle}`} />
-          <span className={`text-sm font-semibold uppercase tracking-wider ${categoryColor}`}>
-            {categoryLabels[project.category]}
-          </span>
-          {project.year && (
-            <>
-              <span className="text-border">•</span>
-              <span className="text-sm text-secondary">{project.year}</span>
-            </>
-          )}
-        </div>
-
-        <h1 className="text-4xl font-bold tracking-tight text-primary md:text-5xl">
-          {project.title}
-        </h1>
-
-        <p className="mt-4 text-xl leading-relaxed text-secondary">
-          {project.description}
-        </p>
-
-        {project.role && (
-          <p className="mt-4 text-sm text-secondary">
-            <span className="font-semibold text-primary">Role:</span>{" "}
-            {project.role}
-          </p>
-        )}
-
-        {/* Tags */}
-        <div className="mt-6 flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium ${tagStyle}`}
-            >
-              {tag}
+        {/* Header */}
+        <header className="mb-12">
+          <div className="mb-4 flex items-center gap-3">
+            <span className={`inline-block h-2.5 w-2.5 rounded-full ${dotStyle}`} />
+            <span className={`text-sm font-semibold uppercase tracking-wider ${categoryColor}`}>
+              {categoryLabels[project.category]}
             </span>
-          ))}
-        </div>
-      </header>
-
-      {heroImageSrc ? (
-        <img
-          src={heroImageSrc}
-          alt={project.title}
-          className="mb-16 h-64 w-full rounded-2xl object-cover md:h-96"
-        />
-      ) : (
-        <div
-          className={`mb-16 flex h-64 items-center justify-center rounded-2xl bg-gradient-to-br md:h-96 ${gradientBg}`}
-        >
-          <span className="text-6xl font-bold text-primary/10">
-            {project.title.slice(0, 3).toUpperCase()}
-          </span>
-        </div>
-      )}
-
-      {/* Overview */}
-      {project.overview && (
-        <section className="mb-12">
-          <h2 className="mb-4 text-2xl font-bold text-primary">
-            O projektu
-          </h2>
-          <p className="text-lg leading-relaxed text-secondary">
-            {project.overview}
-          </p>
-          {project.subject && (
-            <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-sm">
-              <span className="font-semibold text-primary">Předmět:</span>
-              <span className="text-secondary">{project.subject}</span>
-            </div>
-          )}
-        </section>
-      )}
-
-      {(project.problem || project.solution || project.technologyChoices?.length) && (
-        <section className="mb-12">
-          <h2 className="mb-6 text-2xl font-bold text-primary">Můj přínos</h2>
-
-          <div className="grid gap-10 pb-5 md:grid-cols-1">
-            {project.problem && (
-              <div className="bg-white">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-secondary">
-                  Problém
-                </p>
-                <p className="mt-3 text-base leading-relaxed text-secondary">
-                  {project.problem}
-                </p>
-              </div>
-            )}
-
-            {project.solution && (
-              <div className="bg-white">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-secondary">
-                  Řešení
-                </p>
-                <p className="mt-3 text-base leading-relaxed text-secondary">
-                  {project.solution}
-                </p>
-              </div>
+            {project.year && (
+              <>
+                <span className="text-border">•</span>
+                <span className="text-sm text-secondary">{project.year}</span>
+              </>
             )}
           </div>
 
-          {project.technologyChoices && project.technologyChoices.length > 0 && (
-            <div className="mt-6 rounded-2xl">
-              <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-secondary">
-                Zvolené technologie a proč
-              </h3>
-              <ul className="mt-5 space-y-4">
-                {project.technologyChoices.map((technology) => (
-                  <li key={technology.name} className="flex gap-4">
-                    <span className={`mt-1 inline-block h-2.5 w-2.5 shrink-0 rounded-full ${dotStyle}`} />
-                    <div>
-                      <p className="font-semibold text-primary">{technology.name}</p>
-                      <p className="mt-1 leading-relaxed text-secondary">
-                        {technology.reason}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </section>
-      )}
+          <h1 className="text-4xl font-bold tracking-tight text-primary md:text-5xl">
+            {project.title}
+          </h1>
 
-      {/* Process */}
-      {project.process && project.process.length > 0 && (
-        <section className="mb-12">
-          <h2 className="mb-6 text-2xl font-bold text-primary">Proces</h2>
-          <ol className="space-y-4">
-            {project.process.map((step, i) => (
-              <li key={i} className="flex gap-4">
-                <span
-                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white ${dotStyle}`}
-                >
-                  {i + 1}
-                </span>
-                <p className="pt-1 text-secondary">{step}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-      )}
-
-      {/* Result */}
-      {project.result && (
-        <section className="mb-12 rounded-2xl border border-border bg-surface p-8">
-          <h2 className="mb-4 text-2xl font-bold text-primary">Výsledek</h2>
-          <p className="text-lg leading-relaxed text-secondary">
-            {project.result}
+          <p className="mt-4 text-xl leading-relaxed text-secondary">
+            {project.description}
           </p>
-        </section>
-      )}
 
-      {/* Links */}
-      {(project.link || project.github) && (
-        <div className="mb-12 flex flex-wrap gap-4">
-          {project.link && (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-            >
-              Živá ukázka ↗
-            </a>
+          {project.role && (
+            <p className="mt-4 text-sm text-secondary">
+              <span className="font-semibold text-primary">Role:</span>{" "}
+              {project.role}
+            </p>
           )}
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full border border-border px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-surface"
-            >
-              GitHub ↗
-            </a>
-          )}
+
+          {/* Tags */}
+          <div className="mt-6 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className={`rounded-full px-4 py-1.5 text-sm font-medium ${tagStyle}`}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </header>
+
+        {heroImageSrc ? (
+          <img
+            src={heroImageSrc}
+            alt={project.title}
+            className="mb-16 h-64 w-full rounded-2xl object-cover md:h-96"
+          />
+        ) : (
+          <div
+            className={`mb-16 flex h-64 items-center justify-center rounded-2xl bg-gradient-to-br md:h-96 ${gradientBg}`}
+          >
+            <span className="text-6xl font-bold text-primary/10">
+              {project.title.slice(0, 3).toUpperCase()}
+            </span>
+          </div>
+        )}
+
+        {/* Overview */}
+        {project.overview && (
+          <section className="mb-12">
+            <h2 className="mb-4 text-2xl font-bold text-primary">
+              O projektu
+            </h2>
+            <p className="text-lg leading-relaxed text-secondary">
+              {project.overview}
+            </p>
+            {project.subject && (
+              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-sm">
+                <span className="font-semibold text-primary">Předmět:</span>
+                <span className="text-secondary">{project.subject}</span>
+              </div>
+            )}
+          </section>
+        )}
+
+        {(project.problem || project.solution || project.technologyChoices?.length) && (
+          <section className="mb-12">
+            <h2 className="mb-6 text-2xl font-bold text-primary">Můj přínos</h2>
+
+            <div className="grid gap-10 pb-5 md:grid-cols-1">
+              {project.problem && (
+                <div className="bg-white">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-secondary">
+                    Problém
+                  </p>
+                  <p className="mt-3 text-base leading-relaxed text-secondary">
+                    {project.problem}
+                  </p>
+                </div>
+              )}
+
+              {project.solution && (
+                <div className="bg-white">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-secondary">
+                    Řešení
+                  </p>
+                  <p className="mt-3 text-base leading-relaxed text-secondary">
+                    {project.solution}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {project.technologyChoices && project.technologyChoices.length > 0 && (
+              <div className="mt-6 rounded-2xl">
+                <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-secondary">
+                  Zvolené technologie a proč
+                </h3>
+                <ul className="mt-5 space-y-4">
+                  {project.technologyChoices.map((technology) => (
+                    <li key={technology.name} className="flex gap-4">
+                      <span className={`mt-1 inline-block h-2.5 w-2.5 shrink-0 rounded-full ${dotStyle}`} />
+                      <div>
+                        <p className="font-semibold text-primary">{technology.name}</p>
+                        <p className="mt-1 leading-relaxed text-secondary">
+                          {technology.reason}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* Process */}
+        {project.process && project.process.length > 0 && (
+          <section className="mb-12">
+            <h2 className="mb-6 text-2xl font-bold text-primary">Proces</h2>
+            <ol className="space-y-4">
+              {project.process.map((step, i) => (
+                <li key={i} className="flex gap-4">
+                  <span
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white ${dotStyle}`}
+                  >
+                    {i + 1}
+                  </span>
+                  <p className="pt-1 text-secondary">{step}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+
+        {/* Result */}
+        {project.result && (
+          <section className="mb-12 rounded-2xl border border-border bg-surface p-8">
+            <h2 className="mb-4 text-2xl font-bold text-primary">Výsledek</h2>
+            <p className="text-lg leading-relaxed text-secondary">
+              {project.result}
+            </p>
+          </section>
+        )}
+
+        {/* Links */}
+        {(project.link || project.github) && (
+          <div className="mb-12 flex flex-wrap gap-4">
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              >
+                Živá ukázka ↗
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-border px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-surface"
+              >
+                GitHub ↗
+              </a>
+            )}
+          </div>
+        )}
+
+        {/* Screenshots */}
+        {hasScreenshots && screenshotSrcs ? (
+          <section className="mb-12 border-t border-border pt-8">
+            <div className="mb-6 flex items-end justify-between gap-4">
+              <div>
+                <h2 className="text-2xl font-bold text-primary">Ukázky</h2>
+              </div>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {screenshotSrcs.map((screenshotSrc, index) =>
+                screenshotSrc ? (
+                  <button
+                    key={screenshotSrc}
+                    type="button"
+                    onClick={() => setSelectedScreenshot(screenshotSrc)}
+                    className="group overflow-hidden rounded-2xl border border-border bg-surface text-left transition-transform hover:-translate-y-1"
+                  >
+                    <img
+                      src={screenshotSrc}
+                      alt={`${project.title} screenshot ${index + 1}`}
+                      className="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    />
+                  </button>
+                ) : null,
+              )}
+            </div>
+          </section>
+        ) : null}
+
+        {/* Back link */}
+        <div className="border-t border-border pt-8">
+          <Link
+            to="/"
+            className="text-sm font-semibold text-secondary transition-colors hover:text-primary"
+          >
+            ← Zpět na všechny projekty
+          </Link>
         </div>
-      )}
+      </article>
 
-      {/* Back link */}
-      <div className="border-t border-border pt-8">
-        <Link
-          to="/"
-          className="text-sm font-semibold text-secondary transition-colors hover:text-primary"
+      {selectedScreenshot ? (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 py-8"
+          onClick={() => setSelectedScreenshot(null)}
+          role="presentation"
         >
-          ← Zpět na všechny projekty
-        </Link>
-      </div>
-    </article>
+          <div className="relative w-full max-w-6xl" onClick={(event) => event.stopPropagation()}>
+            <button
+              type="button"
+              onClick={() => setSelectedScreenshot(null)}
+              className="absolute right-4 top-4 z-10 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-primary shadow-sm transition-opacity hover:opacity-90"
+            >
+              Zavřít
+            </button>
+            <img
+              src={selectedScreenshot}
+              alt={`${project.title} zvětšený screenshot`}
+              className="max-h-[85vh] w-full rounded-2xl object-contain"
+            />
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 }

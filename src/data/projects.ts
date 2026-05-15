@@ -213,7 +213,11 @@ export const projects: Project[] = [
     "category": "dev",
     tags: ["Microservices", "SOA", "Draw.io", "Usecase Diagram", "Component Diagram"],
     heroImage: null,
-    screenshots: null,
+    screenshots: [
+      'portfolio/projects/architecture-of-service-for-missing-pets/screenshot-1.png',
+      'portfolio/projects/architecture-of-service-for-missing-pets/screenshot-2.png',
+      'portfolio/projects/architecture-of-service-for-missing-pets/screenshot-3.png',
+    ],
     year: "2025",
     role: "System Architect",
     overview:
@@ -240,7 +244,6 @@ export const projects: Project[] = [
       },
     ],
     github: "https://github.com/vojtechnerad/4IT575-seminarni-prace",
-    link: "https://github.com/vojtechnerad/4IT575-seminarni-prace/blob/main/README.md",
     result: "Pro projekt jsme navrhli dvě řešení - jedno založené na microservices a druhé na SOA. Obě řešení zahrnovala detailní diagramy komponent, use case diagramy a návrh databázového schématu. Naše práce poskytla jasný plán pro implementaci služby a zdůraznila klíčové aspekty škálovatelnosti a spolehlivosti.",
     process:[
       "Analýza požadavků a funkcionalit služby",
@@ -259,7 +262,9 @@ export const projects: Project[] = [
     category: "dev",
     tags: ["React", "TypeScript", "Tailwind CSS"],
     heroImage: null,
-    screenshots: null,
+    screenshots: [
+      'portfolio/projects/password-manager-prototype/screenshot-1.png',
+    ],
     year: "2024",
     role: "Frontend Developer",
     overview:

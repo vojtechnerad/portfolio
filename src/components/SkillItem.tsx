@@ -25,7 +25,7 @@ export default function SkillItem({ label, level, accent }: SkillItemProps) {
         <span className="text-sm font-medium text-primary">{label}</span>
       </div>
 
-      <div className="mt-3 h-2.5 overflow-hidden rounded-full border border-border/80 bg-border/80">
+      <div className="mt-3 h-2.5 overflow-hidden rounded-full border border-border/0 bg-border/80">
         <div
           className={`h-full rounded-full ${classes.bar}`}
           style={{ width: `${level}%` }}

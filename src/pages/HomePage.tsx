@@ -10,7 +10,7 @@ export default function HomePage() {
     .slice(0, 1);
   const bothProjects = projects
     .filter((p) => p.category === "both")
-    .slice(0, 2);
+    .slice(0, 1);
   const featured = [...bothProjects, ...devOnly, ...designOnly];
 
   return (
@@ -59,7 +59,7 @@ export default function HomePage() {
               React, TypeScript, Next.js a moderní frontend stack.
             </p>
             <p className="mt-2 text-xs text-secondary">
-              {projects.filter((p) => hasCategory(p, "dev")).length} projektů
+              Projekty: {projects.filter((p) => hasCategory(p, "dev")).length}
             </p>
             <Link
               to="/projekty?filter=dev"
@@ -79,7 +79,7 @@ export default function HomePage() {
               User research, wireframing, prototypování a design systémy.
             </p>
             <p className="mt-2 text-xs text-secondary">
-              {projects.filter((p) => hasCategory(p, "design")).length} projektů
+              Projekty: {projects.filter((p) => hasCategory(p, "design")).length}
             </p>
             <Link
               to="/projekty?filter=design"
@@ -101,7 +101,7 @@ export default function HomePage() {
             Průřez mou prací z obou oblastí.
           </p>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}

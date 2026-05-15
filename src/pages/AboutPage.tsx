@@ -1,5 +1,18 @@
 import SkillItem from "../components/SkillItem";
 
+const cvLinks = [
+  {
+    href: `${import.meta.env.BASE_URL}cv-vojtech-nerad-cz.pdf`,
+    label: "CV česky",
+    iconId: "cz-icon",
+  },
+  {
+    href: `${import.meta.env.BASE_URL}cv-vojtech-nerad-en.pdf`,
+    label: "CV english",
+    iconId: "us-icon",
+  },
+];
+
 const developmentSkills = [
   { label: "Angular", level: 90 },
   { label: "React", level: 80 },
@@ -44,6 +57,27 @@ export default function AboutPage() {
             designu. Proto se věnuji oběma disciplínám — od user research a
             wireframů přes prototypy až po pixelperfektní implementaci v Reactu.
           </p>
+
+          <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+            {cvLinks.map((cvLink) => (
+              <a
+                key={cvLink.href}
+                href={cvLink.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 rounded-full border border-border bg-white px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-surface"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="h-5 w-5 shrink-0 overflow-hidden rounded-full"
+                  viewBox="0 0 24 24"
+                >
+                  <use href={`${import.meta.env.BASE_URL}icons.svg#${cvLink.iconId}`} />
+                </svg>
+                {cvLink.label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 

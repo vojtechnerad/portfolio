@@ -149,6 +149,57 @@ export default function ProjectDetailPage() {
         </section>
       )}
 
+      {(project.problem || project.solution || project.technologyChoices?.length) && (
+        <section className="mb-12">
+          <h2 className="mb-6 text-2xl font-bold text-primary">Můj přínos</h2>
+
+          <div className="grid gap-10 pb-5 md:grid-cols-1">
+            {project.problem && (
+              <div className="bg-white">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-secondary">
+                  Problém
+                </p>
+                <p className="mt-3 text-base leading-relaxed text-secondary">
+                  {project.problem}
+                </p>
+              </div>
+            )}
+
+            {project.solution && (
+              <div className="bg-white">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-secondary">
+                  Řešení
+                </p>
+                <p className="mt-3 text-base leading-relaxed text-secondary">
+                  {project.solution}
+                </p>
+              </div>
+            )}
+          </div>
+
+          {project.technologyChoices && project.technologyChoices.length > 0 && (
+            <div className="mt-6 rounded-2xl">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-secondary">
+                Zvolené technologie a proč
+              </h3>
+              <ul className="mt-5 space-y-4">
+                {project.technologyChoices.map((technology) => (
+                  <li key={technology.name} className="flex gap-4">
+                    <span className={`mt-1 inline-block h-2.5 w-2.5 shrink-0 rounded-full ${dotStyle}`} />
+                    <div>
+                      <p className="font-semibold text-primary">{technology.name}</p>
+                      <p className="mt-1 leading-relaxed text-secondary">
+                        {technology.reason}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      )}
+
       {/* Process */}
       {project.process && project.process.length > 0 && (
         <section className="mb-12">

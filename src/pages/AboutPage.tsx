@@ -1,3 +1,22 @@
+import SkillItem from "../components/SkillItem";
+
+const developmentSkills = [
+  { label: "Angular", level: 90 },
+  { label: "React", level: 80 },
+  { label: "TypeScript", level: 80 },
+  { label: "Tailwind CSS", level: 70 },
+  { label: "Node.js", level: 40 },
+  { label: "Git & CI/CD", level: 70 },
+];
+
+const designSkills = [
+  { label: "Figma", level: 84 },
+  { label: "Wireframing & Prototyping", level: 80 },
+  { label: "Design Systems", level: 80 },
+  { label: "User Research", level: 60 },
+  { label: "Usability Testing", level: 60 },
+];
+
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
@@ -25,36 +44,42 @@ export default function AboutPage() {
             designu. Proto se věnuji oběma disciplínám — od user research a
             wireframů přes prototypy až po pixelperfektní implementaci v Reactu.
           </p>
+        </div>
+      </div>
 
-          {/* Skills */}
-          <div className="grid gap-6 pt-4 sm:grid-cols-2">
-            <div>
-              <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-accent-dev">
-                <span className="inline-block h-2 w-2 rounded-full bg-accent-dev" />
-                Development
-              </h3>
-              <ul className="space-y-1 text-sm text-secondary">
-                <li>React / Next.js</li>
-                <li>TypeScript</li>
-                <li>Tailwind CSS</li>
-                <li>Node.js</li>
-                <li>Git & CI/CD</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-accent-design">
-                <span className="inline-block h-2 w-2 rounded-full bg-accent-design" />
-                UX/UI Design
-              </h3>
-              <ul className="space-y-1 text-sm text-secondary">
-                <li>Figma</li>
-                <li>User Research</li>
-                <li>Wireframing & Prototyping</li>
-                <li>Design Systems</li>
-                <li>Usability Testing</li>
-              </ul>
-            </div>
-          </div>
+      {/* Skills */}
+      <div className="grid gap-6 pt-15 sm:grid-cols-2">
+        <div>
+          <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-accent-dev">
+            <span className="inline-block h-2 w-2 rounded-full bg-accent-dev" />
+            Development
+          </h3>
+          <ul className="space-y-4">
+            {developmentSkills.map((skill) => (
+              <SkillItem
+                key={skill.label}
+                label={skill.label}
+                level={skill.level}
+                accent="dev"
+              />
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-accent-design">
+            <span className="inline-block h-2 w-2 rounded-full bg-accent-design" />
+            UX/UI Design
+          </h3>
+          <ul className="space-y-4">
+            {designSkills.map((skill) => (
+              <SkillItem
+                key={skill.label}
+                label={skill.label}
+                level={skill.level}
+                accent="design"
+              />
+            ))}
+          </ul>
         </div>
       </div>
 

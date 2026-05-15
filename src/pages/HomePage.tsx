@@ -47,7 +47,7 @@ export default function HomePage() {
 
       {/* Rozdělovač – tři oblasti */}
       <section className="border-t border-border px-6 py-20">
-        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
+        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
           {/* Dev card */}
           <div className="rounded-2xl border border-border bg-gradient-to-br from-blue-50 to-white p-8">
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-dev/10">
@@ -63,28 +63,6 @@ export default function HomePage() {
             <Link
               to="/projekty?filter=dev"
               className="mt-5 inline-block text-sm font-semibold text-accent-dev hover:underline"
-            >
-              Zobrazit →
-            </Link>
-          </div>
-
-          {/* Both card */}
-          <div className="rounded-2xl border border-border bg-gradient-to-br from-blue-50 via-purple-50 to-white p-8">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-accent-dev/10 to-accent-design/10">
-              <span className="text-xl">🔗</span>
-            </div>
-            <h2 className="text-xl font-bold text-primary">
-              Design &amp; Implementace
-            </h2>
-            <p className="mt-3 text-sm leading-relaxed text-secondary">
-              Projekty, kde jsem navrhl i implementoval — od výzkumu po kód.
-            </p>
-            <p className="mt-2 text-xs text-secondary">
-              {projects.filter((p) => p.category === "both").length} projektů
-            </p>
-            <Link
-              to="/projekty?filter=both"
-              className="mt-5 inline-block text-sm font-semibold bg-gradient-to-r from-accent-dev to-accent-design bg-clip-text text-transparent hover:underline"
             >
               Zobrazit →
             </Link>

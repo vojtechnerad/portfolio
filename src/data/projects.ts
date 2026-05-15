@@ -20,7 +20,7 @@ export interface Project {
 export const categoryLabels: Record<ProjectCategory, string> = {
   dev: "Development",
   design: "UX/UI Design",
-  both: "Design & Implementace",
+  both: "Development & UX/UI Design",
 };
 
 export function hasCategory(

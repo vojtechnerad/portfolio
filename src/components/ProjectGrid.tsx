@@ -32,7 +32,7 @@ export default function ProjectGrid({
     { value: "all", label: "Všechny" },
     { value: "dev", label: "Development" },
     { value: "design", label: "UX/UI Design" },
-    { value: "both", label: "Design & Implementace" },
+    { value: "both", label: "Development & UX/UI Design" },
   ];
 
   return (

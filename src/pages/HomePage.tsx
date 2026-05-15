@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ContactCta from "../components/ContactCta";
 import ProjectCard from "../components/ProjectCard";
 import { projects, hasCategory } from "../data/projects";
 
@@ -105,6 +106,12 @@ export default function HomePage() {
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="border-t border-border px-6 py-20">
+        <div className="mx-auto max-w-4xl">
+          <ContactCta />
         </div>
       </section>
     </>

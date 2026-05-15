@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import type { Project } from "../data/projects";
-import { categoryLabels } from "../data/projects";
+import { categoryLabels, getProjectImageSrc } from "../data/projects";
 
 interface ProjectCardProps {
   project: Project;
@@ -31,18 +31,26 @@ function getCategoryStyle(category: Project["category"]) {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   const style = getCategoryStyle(project.category);
+  const heroImageSrc = getProjectImageSrc(project.heroImage);
 
   return (
     <Link to={`/project/${project.id}`} className="group">
       <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white transition-shadow hover:shadow-lg">
-        {/* Image placeholder */}
-        <div
-          className={`flex h-48 items-center justify-center bg-gradient-to-br ${style.gradient}`}
-        >
-          <span className="text-4xl font-bold text-primary/15">
-            {project.title.slice(0, 2).toUpperCase()}
-          </span>
-        </div>
+        {heroImageSrc ? (
+          <img
+            src={heroImageSrc}
+            alt={project.title}
+            className="h-48 w-full object-cover"
+          />
+        ) : (
+          <div
+            className={`flex h-48 items-center justify-center bg-gradient-to-br ${style.gradient}`}
+          >
+            <span className="text-4xl font-bold text-primary/15">
+              {project.title.slice(0, 2).toUpperCase()}
+            </span>
+          </div>
+        )}
 
         <div className="flex flex-1 flex-col gap-3 p-6">
           <div className="flex items-center gap-2">

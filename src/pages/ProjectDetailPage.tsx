@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { projects, categoryLabels } from "../data/projects";
+import { projects, categoryLabels, getProjectImageSrc } from "../data/projects";
 
 export default function ProjectDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -51,6 +51,8 @@ export default function ProjectDetailPage() {
       : project.category === "design"
         ? "bg-purple-50 text-purple-700"
         : "bg-gradient-to-r from-blue-50 to-purple-50 text-purple-700";
+
+  const heroImageSrc = getProjectImageSrc(project.heroImage);
 
   return (
     <article className="mx-auto max-w-4xl px-6 py-16">
@@ -113,14 +115,21 @@ export default function ProjectDetailPage() {
         </div>
       </header>
 
-      {/* Hero image placeholder */}
-      <div
-        className={`mb-16 flex h-64 items-center justify-center rounded-2xl bg-gradient-to-br md:h-96 ${gradientBg}`}
-      >
-        <span className="text-6xl font-bold text-primary/10">
-          {project.title.slice(0, 3).toUpperCase()}
-        </span>
-      </div>
+      {heroImageSrc ? (
+        <img
+          src={heroImageSrc}
+          alt={project.title}
+          className="mb-16 h-64 w-full rounded-2xl object-cover md:h-96"
+        />
+      ) : (
+        <div
+          className={`mb-16 flex h-64 items-center justify-center rounded-2xl bg-gradient-to-br md:h-96 ${gradientBg}`}
+        >
+          <span className="text-6xl font-bold text-primary/10">
+            {project.title.slice(0, 3).toUpperCase()}
+          </span>
+        </div>
+      )}
 
       {/* Overview */}
       {project.overview && (

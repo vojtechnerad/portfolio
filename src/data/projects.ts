@@ -6,7 +6,7 @@ export interface Project {
   description: string;
   category: ProjectCategory;
   tags: string[];
-  image?: string;
+  heroImage: string | null;
   link?: string;
   github?: string;
   year?: string;
@@ -30,6 +30,14 @@ export function hasCategory(
   return project.category === filter || project.category === "both";
 }
 
+export function getProjectImageSrc(heroImage: string | null): string | null {
+  if (!heroImage) {
+    return null;
+  }
+
+  return heroImage.startsWith("/") ? heroImage : `/${heroImage}`;
+}
+
 export const projects: Project[] = [
   {
     id: "restaurant-visual-identity",
@@ -37,6 +45,7 @@ export const projects: Project[] = [
     description: "Kompletní vizuální identita pro imaginární restauraci Slunce, zahrnující logo, barvy, typografii a aplikace na různých materiálech.",
     category: "design",
     tags: ["InkScape", "Affinity", "Branding", "Logo Design", "Visual Identity"],
+    heroImage: 'portfolio/projects/restaurant-visual-identity/hero.png',
     year: "2024",
     role: "Graphic Designer",
     overview:
@@ -57,6 +66,7 @@ export const projects: Project[] = [
       "Návrh produktové stránky pro e-commerce prodej kávy, zaměřený na vizuální přitažlivost a uživatelskou přívětivost.",
     category: "design",
     tags: ["Figma", "UX Research", "Prototyping"],
+    heroImage: 'portfolio/projects/design-cofee-product-page/hero.png',
     year: "2024",
     role: "UX/UI Designer",
     overview: 
@@ -79,8 +89,9 @@ export const projects: Project[] = [
     title: "Fotografické portfolio",
     description:
       "Osobní portfolio pro prezentaci fotografických prací, navržené s důrazem na vizuální estetiku a jednoduchost.",
-    category: "dev",
+    category: "both",
     tags: ["React", "Tailwind CSS"],
+    heroImage: 'portfolio/projects/photography-portfolio-website/hero.png',
     github: "https://github.com/vojtechnerad/photography-portfolio",
     year: "2024",
     role: "Frontend Developer",
@@ -96,6 +107,7 @@ export const projects: Project[] = [
       : "Fullstack e-commerce řešení postavené na PHP + NETTE s administračním rozhraním.",
     category: "both",
     tags: ["PHP", "NETTE", "MySQL", "Bootstrap"],
+    heroImage: null,
     year: "2023",
     role: "Fullstack Developer & Designer",
     overview:
@@ -108,6 +120,7 @@ export const projects: Project[] = [
     "description": "Návrh architektury pro službu, která pomáhá lidem najít pohřešované domácí mazlíčky pomocí webové platformy.",
     "category": "dev",
     tags: ["Microservices", "SOA", "Draw.io", "Usecase Diagram", "Component Diagram"],
+    heroImage: null,
     year: "2025",
     role: "System Architect",
     overview:
@@ -131,6 +144,7 @@ export const projects: Project[] = [
     description: "Návrh a implementace prototypu pro správce hesel s důrazem na uživatelskou přívětivost.",
     category: "dev",
     tags: ["React", "TypeScript", "Tailwind CSS"],
+    heroImage: null,
     year: "2024",
     role: "Frontend Developer",
     overview:
